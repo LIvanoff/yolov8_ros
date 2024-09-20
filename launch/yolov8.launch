@@ -1,0 +1,14 @@
+<launch>
+    <!-- ROS topics -->
+    <arg name="input_image_topic" default="/camera/center/image_raw/compressed" />
+    <arg name="output_detections_topic" default="/yolov8/detections" />
+    <arg name="output_array_topic" default="/yolov8/array" />
+    <arg name="weights" default="$(find yolov5_ros)/src/yolov8_ros/checkpoints/best.pt/>
+
+    <!-- Launch the yolov8_node.py node -->
+    <node name="yolov8_node" pkg="yolov8_ros" type="yolov8_node.py" output="screen"/>
+        <param name="input_image_topic" value="$(arg input_image_topic)" />
+        <param name="output_detections_topic" value="$(arg output_detections_topic)" />
+        <param name="output_array_topic" value="$(arg output_array_topic)" />
+        <param name="weights" value="$(arg weights)" />
+    </launch>
